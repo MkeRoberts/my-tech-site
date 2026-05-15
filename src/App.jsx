@@ -13,30 +13,25 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-  };
-
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
-      {/* FUTURISTIC BACKGROUND */}
+      {/* 🌌 FUTURISTIC BACKGROUND */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-black" />
         <div className="absolute w-[600px] h-[600px] bg-cyan-500/20 blur-[160px] rounded-full top-[-200px] left-[-200px]" />
         <div className="absolute w-[600px] h-[600px] bg-purple-500/20 blur-[160px] rounded-full bottom-[-200px] right-[-200px]" />
       </div>
 
-      {/* NAV */}
+      {/* NAVBAR */}
       <header className={`fixed top-0 w-full z-50 transition ${
         scrolled ? "bg-black/70 backdrop-blur-xl border-b border-white/10" : ""
       }`}>
         <div className="max-w-6xl mx-auto flex justify-between items-center p-5">
 
           <div className="flex items-center gap-3">
-            <img src={logo} className="w-10 h-10 rounded-xl" />
-            <h1 className="font-bold">DJC Solutions</h1>
+            <img src={logo} className="w-10 h-10 rounded-xl object-cover" />
+            <h1 className="font-bold tracking-wide text-lg">DJC Solutions</h1>
           </div>
 
         </div>
@@ -45,12 +40,12 @@ export default function App() {
       {/* HERO */}
       <section className="min-h-screen flex items-center justify-center text-center px-6">
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={fadeUp}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold">
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
             Build the Future of
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
               Digital Systems
@@ -58,13 +53,15 @@ export default function App() {
           </h1>
 
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto">
-            Futuristic web platforms, automation systems, and AI-powered infrastructure.
+            Futuristic web platforms, automation systems, and AI-powered infrastructure
+            for modern businesses.
           </p>
 
           <div className="mt-10 flex gap-4 justify-center">
             <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-semibold hover:scale-105 transition">
               Get Started
             </button>
+
             <button className="px-6 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition">
               Learn More
             </button>
@@ -77,9 +74,18 @@ export default function App() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
 
           {[
-            { title: "AI Automation", desc: "Smart workflows powered by AI." },
-            { title: "Cloud Systems", desc: "Scalable infrastructure worldwide." },
-            { title: "Security", desc: "Enterprise-grade protection." }
+            {
+              title: "AI Automation",
+              desc: "Smart workflows powered by artificial intelligence."
+            },
+            {
+              title: "Cloud Systems",
+              desc: "Scalable infrastructure built for performance."
+            },
+            {
+              title: "Cyber Security",
+              desc: "Advanced protection for digital assets."
+            }
           ].map((f, i) => (
             <motion.div
               key={i}
@@ -98,22 +104,40 @@ export default function App() {
         </div>
       </section>
 
-      {/* COREOPS PRO */}
-      <motion.section
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="py-28 px-6 bg-white/5 border-y border-white/10 backdrop-blur-xl text-center"
+      {/* COREOPS PRO (CLICKABLE PREMIUM SECTION) */}
+      <a
+        href="https://www.coreopspro.ca"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
       >
-        <img src={coreopsproLogo} className="w-16 h-16 mx-auto mb-6 rounded-xl" />
+        <motion.section
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          whileHover={{ scale: 1.02 }}
+          className="py-28 px-6 bg-white/5 border-y border-white/10 backdrop-blur-xl text-center transition-all duration-300 hover:bg-white/10 hover:shadow-[0_0_50px_rgba(34,211,238,0.15)] cursor-pointer"
+        >
+          <img
+            src={coreopsproLogo}
+            className="w-16 h-16 mx-auto mb-6 rounded-xl shadow-lg border border-white/10"
+            alt="CoreOpsPro"
+          />
 
-        <h2 className="text-4xl font-bold">CoreOpsPro</h2>
+          <h2 className="text-4xl font-bold tracking-wide">
+            CoreOpsPro
+          </h2>
 
-        <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-          Intelligent automation systems that optimize and scale business operations in real time.
-        </p>
-      </motion.section>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Intelligent automation systems that optimize and scale business operations in real time.
+          </p>
+
+          <div className="mt-8 text-cyan-400 font-medium">
+            Visit CoreOpsPro →
+          </div>
+        </motion.section>
+      </a>
 
       {/* CONTACT */}
       <section className="py-28 px-6 text-center">
@@ -130,7 +154,7 @@ export default function App() {
             <textarea className="w-full p-3 rounded-xl bg-white/5 border border-white/10" rows="4" placeholder="Message" />
 
             <button className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-bold hover:scale-105 transition">
-              Send
+              Send Message
             </button>
           </div>
         </motion.div>
